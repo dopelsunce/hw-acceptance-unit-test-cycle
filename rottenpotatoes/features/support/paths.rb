@@ -21,6 +21,25 @@ module NavigationHelpers
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
 
+    when /^the edit page for "(.*)"$/i 
+      edit_movie_path(Movie.find_by_title($1))
+
+    when /^the details page for "(.*)"$/i
+      movie_path(Movie.find_by_title($1))
+
+    when /^the Similar Movies page for "(.+)"/
+      movie = Movie.find_by(title: $1)
+      similar_movies_path(movie)
+
+    when /^the home\s?page$/ then
+      '/movies'
+      
+    when /^the RottenPotatoes home page$/ then
+      '/movies'
+
+    when /^the "Create New Movie" page$/ then
+      new_movie_path
+      
     else
       begin
         page_name =~ /^the (.*) page$/
